@@ -15,3 +15,4 @@ RUN npm install
 COPY . .
 RUN npm run-script build
 #RUN npm test
+#Hello there.
