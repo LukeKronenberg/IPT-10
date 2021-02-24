@@ -1,17 +1,16 @@
 FROM ubuntu:focal
 
 RUN apt-get update && apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 
+WORKDIR /src
 
-ENV CI=true
-COPY package.json .
-COPY package-lock.json .
-
+COPY package.json /src/package.json
+COPY package-lock.json /src/package-lock.json
 
 RUN npm install
 
-COPY . .
+COPY . /src/
 RUN npm run-script build
-#RUN npm test
+RUN CI=true npm test
