@@ -9,6 +9,14 @@ function App() {
   //how to bind --> const [val, updateVal] = useState(1)
   
   //funtions here
+  function StartScreen(){
+    return(<div className="StartScreen">
+      <div className="GameName">
+        <p>Insert Name</p>
+      </div>
+    </div>)
+  }
+
   function Tile(numb: any){
     return (<div id={numb} className="tile">{numb}</div>)
   }
@@ -35,6 +43,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <StartScreen/>
         <Board/>
       </header>
     </div>
