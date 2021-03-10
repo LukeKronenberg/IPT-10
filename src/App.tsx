@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import './App.css';
 
+enum ActiveScreen{Playfield, StartScreen}
+
 function App() {
 
   //variables here
   //how to bind --> const [val, updateVal] = useState(1)
 
-  const [showPlayfield, setshowPlayfield] = React.useState(false);
-  const [showStartScreen, setshowStartScreen] = React.useState(true);
+  const [activescreen, setactivescreen] = React.useState(ActiveScreen.StartScreen);
 
   //funtions here
   function StartScreen() {
-    return (<div className={"StartScreen " + (showStartScreen ? " " : "hidden ")} onClick={togglePlayfield}>
+    return (<div className={"StartScreen " + (activescreen==ActiveScreen.StartScreen ? " " : "hidden ")} onClick={togglePlayfield}>
       <div className="GameName">
-        <p>Insert Name</p>
+        <p>Insert Gamename</p>
+        <p className="Border">Start Game</p>
+        <p className="Border">Tutorial</p>
       </div>
     </div>)
   }
 
   function BoardParent() {
-    return <div id="play-field" className={"board-parent " + (showPlayfield ? " " : "hidden ")} onClick={togglePlayfield}><Board /></div>
+    return <div id="play-field" className={"board-parent " + (activescreen==ActiveScreen.Playfield ? " " : "hidden ")} onClick={togglePlayfield}><Board /></div>
   }
 
   function Board() {
@@ -45,12 +48,10 @@ function App() {
   }
 
   function togglePlayfield() {
-    if (showPlayfield) {
-      setshowPlayfield(false);
-      setshowStartScreen(true);
+    if (activescreen==ActiveScreen.StartScreen) {
+      setactivescreen(ActiveScreen.Playfield)
     } else {
-      setshowPlayfield(true);
-      setshowStartScreen(false);
+      setactivescreen(ActiveScreen.StartScreen)
     }
   }
 
