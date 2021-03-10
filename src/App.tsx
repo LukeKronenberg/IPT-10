@@ -9,12 +9,33 @@ function App() {
   //how to bind --> const [val, updateVal] = useState(1)
   
   //funtions here
+  function Tile(numb: any){
+    return (<div id={numb} className="tile">{numb}</div>)
+  }
+
+  function Board(){
+    
+    var tileArray: any[] = [];
+
+    for(var i = 0; i < 100; i++){
+      tileArray.push(i);
+    }
+
+    tileArray.map(numb => {
+      <Tile value={numb}/>
+    })
+
+    var element = <div id="board">
+      {tileArray}
+    </div>;
+    return element;
+  }
 
 
   return (
     <div className="App">
       <header className="App-header">
-        {/* HTML here */}
+        <Board/>
       </header>
     </div>
   );
