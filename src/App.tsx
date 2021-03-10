@@ -1,50 +1,64 @@
 import React, { useState } from 'react';
 import './App.css';
 
-//funtions here
-
 function App() {
 
   //variables here
   //how to bind --> const [val, updateVal] = useState(1)
-  
+
+  const [showPlayfield, setshowPlayfield] = React.useState(false);
+  const [showStartScreen, setshowStartScreen] = React.useState(true);
+
   //funtions here
-  function StartScreen(){
-    return(<div className="StartScreen">
+  function StartScreen() {
+    return (<div className={"StartScreen " + (showStartScreen ? " " : "hidden ")} onClick={togglePlayfield}>
       <div className="GameName">
         <p>Insert Name</p>
       </div>
     </div>)
   }
 
-  function Tile(numb: any){
-    return (<div id={numb} className="tile">{numb}</div>)
+  function BoardParent() {
+    return <div id="play-field" className={"board-parent " + (showPlayfield ? " " : "hidden ")} onClick={togglePlayfield}><Board /></div>
   }
 
-  function Board(){
-    
-    var tileArray: any[] = [];
+  function Board() {
 
-    for(var i = 0; i < 100; i++){
+    var tileArray: number[] = [];
+
+    for (var i = 1; i <= 100; i++) {
       tileArray.push(i);
     }
 
-    tileArray.map(numb => {
-      <Tile value={numb}/>
+    const tileArrayFinal = tileArray.map(numb => {
+      return <Tile numb={numb} />
     })
 
-    var element = <div id="board">
-      {tileArray}
+    var element = <div id="board" className="board">
+      {tileArrayFinal}
     </div>;
     return element;
   }
 
+  function Tile(props: { numb: number }) {
+    return <div id={"Tile" + props.numb.toFixed()} className="tile">{props.numb}</div>
+  }
+
+  function togglePlayfield() {
+    if (showPlayfield) {
+      setshowPlayfield(false);
+      setshowStartScreen(true);
+    } else {
+      setshowPlayfield(true);
+      setshowStartScreen(false);
+    }
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <StartScreen/>
-        <Board/>
+        <StartScreen />
+        <BoardParent />
       </header>
     </div>
   );

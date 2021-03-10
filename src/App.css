@@ -4,13 +4,22 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.board-parent {
+  position: absolute;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://images.squarespace-cdn.com/content/v1/551a19f8e4b0e8322a93850a/1566852559261-T73HBDFMAXQT6YCZ2XYF/ke17ZwdGBToddI8pDm48kCK3ShiwawGuxABpoKgwloNZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwh_dMjekDz6LTnUxUQCaAGw31Rdx3PRAMZZRXtwzShsDzRNyEwWtnG1Lw7-qrH-cQ/Grass_Sample.png);
 }
 
 .StartScreen {
@@ -28,11 +37,20 @@
   transform: translate(-50%, -50%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.board {
+  margin: 0;
+  padding: 0;
+  width: 100vh;
+  height: 100vh;
+}
+
+.tile {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  width: 10vh;
+  height: 10vh;
+  display: inline-flex;
+  outline: solid black 5px;
+  outline-offset: -2.5px;
 }
