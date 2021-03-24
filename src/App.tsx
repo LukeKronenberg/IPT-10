@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-enum ActiveScreen{Playfield, StartScreen}
+enum ActiveScreen { Playfield, StartScreen }
 
 function App() {
 
@@ -9,20 +9,29 @@ function App() {
   //how to bind --> const [val, updateVal] = useState(1)
 
   const [activescreen, setactivescreen] = React.useState(ActiveScreen.StartScreen);
+  const [tutorialIsShown, setTutorialIsShown] = React.useState(false);
 
   //funtions here
   function StartScreen() {
-    return (<div className={"StartScreen " + (activescreen==ActiveScreen.StartScreen ? " " : "hidden ")} onClick={togglePlayfield}>
+    return (<div className={"StartScreen " + (activescreen == ActiveScreen.StartScreen ? " " : "hidden ")}>
       <div className="GameName">
         <p>Insert Gamename</p>
-        <p className="Border">Start Game</p>
-        <p className="Border">Tutorial</p>
+        <p className="Border button" onClick={showPlayfield}>Start Game</p>
+        <p className="Border button" onClick={() => setTutorialIsShown(true)}>Tutorial</p>
       </div>
     </div>)
   }
 
   function BoardParent() {
-    return <div id="play-field" className={"board-parent " + (activescreen==ActiveScreen.Playfield ? " " : "hidden ")} onClick={togglePlayfield}><Board /></div>
+    return <div id="play-field" className={"board-parent " + (activescreen == ActiveScreen.Playfield ? " " : "hidden ")}><Board /></div>
+  }
+
+  function Turtorial() {
+    return (
+      <div className={"tutorial-parent" + (tutorialIsShown ? " " : "hidden ")}>
+        Tutorial
+      </div>
+    )
   }
 
   function Board() {
@@ -47,12 +56,12 @@ function App() {
     return <div id={"Tile" + props.numb.toFixed()} className="tile">{props.numb}</div>
   }
 
-  function togglePlayfield() {
-    if (activescreen==ActiveScreen.StartScreen) {
-      setactivescreen(ActiveScreen.Playfield)
-    } else {
-      setactivescreen(ActiveScreen.StartScreen)
-    }
+  function showPlayfield() {
+    setactivescreen(ActiveScreen.Playfield)
+  }
+
+  function showTutorial() {
+
   }
 
   return (
@@ -60,6 +69,7 @@ function App() {
       <header className="App-header">
         <StartScreen />
         <BoardParent />
+        <Turtorial />
       </header>
     </div>
   );
