@@ -26,10 +26,11 @@ function App() {
     return <div id="play-field" className={"board-parent " + (activescreen == ActiveScreen.Playfield ? " " : "hidden ")}><Board /></div>
   }
 
-  function Turtorial() {
+  function Tutorial() {
     return (
       <div className={"tutorial-parent" + (tutorialIsShown ? " " : "hidden ")}>
         Tutorial
+        <p className="Border CloseButton" onClick={() => setTutorialIsShown(false)}>Close</p>
       </div>
     )
   }
@@ -69,7 +70,7 @@ function App() {
       <header className="App-header">
         <StartScreen />
         <BoardParent />
-        <Turtorial />
+        <Tutorial />
       </header>
     </div>
   );
